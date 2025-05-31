@@ -14,24 +14,37 @@ webSocketServer.on('connection', (ws, req) => {
     
     ws.on('message', (data) => {
       let ESP;
-  
-      try{
+    
+      try {
         ESP = JSON.parse(data);
-        console.log(ESP);
-      }catch(e){
-        console.warn('Error al leer rssi');
+      } catch (e) {
+        console.warn('Error al leer JSON desde ESP:', e);
+        return;
       }
-  
+    
+      // Si position viene como string (ej. "[0.0, 0.0]"), lo convertimos a array
+      if (typeof ESP.posicion === 'string') {
+        console.log("ES STRING!!");
+        try {
+          ESP.posicion = JSON.parse(ESP.posicion);
+        } catch (e) {
+          console.warn(
+            `Warning: ESP.position no es un JSON válido: ${ESP.posicion}`
+          );
+          // Podrías asignar un valor por defecto o salir aquí:
+          // return;
+        }
+      }
+    
+      // Ahora ESP.position es realmente un array (p.ej. [0.0, 0.0])
       const antena = ESP.antena;
-      const rssi = ESP.rssi;
-      
-      console.log(`Mensaje recibido de antena ${antena}`);
-
-      newRSSI(antena, rssi, ws);
-
-      const textoRecibido = data.toString();
-      ws.send(`Echo: ${textoRecibido}`);
-    });                  
+      console.log(`Mensaje recibido de antena ${antena}:`, ESP);
+    
+      newRSSI(antena, ESP, ws);
+      ws.send(`Echo: ${data.toString()}`);
+    });
+    
+                      
   
     ws.on('close', () => {
       console.log(`Cliente desconectado: ${clientIP}`);

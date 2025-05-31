@@ -59,6 +59,17 @@ const UserController = {
             res.status(500).json({result: 'False', msg: error.message});
         }
     },
+
+    async get_operators(req, res){
+        try{
+            console.log('Request get operadores');
+            const response = await UserService.getoprtrs();
+            res.status(201).json(response);
+        }catch (error){
+            console.error(error);
+            res.status(500).json({result: 'False', msg: error.message});
+        }
+    },
 };
 
 module.exports = UserController;

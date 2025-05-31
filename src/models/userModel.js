@@ -92,6 +92,15 @@ const userModel = {
     
             return result.rows[0];
     },
+
+    async getOperators(){
+
+        const result = await db.query(
+            `SELECT * FROM usuarios WHERE rol = Operador`
+            );
+    
+            return result.rows;
+    },
 };
 
 module.exports = userModel;

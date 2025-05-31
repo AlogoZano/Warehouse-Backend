@@ -75,6 +75,13 @@ const UserService = {
         return modifiy;
     },
 
+    async getoprtrs(){
+
+        const operators = await userModel.getOperators();
+
+        return operators;
+    },
+
 
 };
 
