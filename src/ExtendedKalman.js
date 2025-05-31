@@ -39,15 +39,15 @@ class ExtendedKalmanFilter {
 
     // Path-loss model
     this.d0    = 1.0;
-    this.P0    = -48.0;
-    this.alpha = 1.8;
+    this.P0    = -44.0;
+    this.alpha = 2.7;
 
     // Anchor positions
     this.anchors = [
       [0.0, 0.0],
       [1.5, 0.0],
-      [0.0, 6.3],
-      [1.5, 6.3]
+      [1.5, 4.1],
+      [0.0, 4.1]
     ];
   }
 

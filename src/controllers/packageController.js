@@ -56,6 +56,17 @@ const PackageController = {
             res.status(500).json({result: 'False', msg: error.message});
         }
     },
+    async getRecent(req, res){
+        try{
+            const num = req.params.num;
+            console.log('Request get recent -> num: ', num);
+            const response = await PackageService.getRecentPkg(num);
+            res.status(201).json(response);
+        }catch (error){
+            console.error(error);
+            res.status(201).json({result: 'False', msg: error.message});
+        }
+    },
     async getState(req, res){
         try{
             const id = req.params.id;

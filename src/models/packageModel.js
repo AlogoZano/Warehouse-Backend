@@ -53,6 +53,13 @@ const packageModel = {
         );
         return result.rows;
     },
+    async getRecentPackages(num){
+        const result = await db.query(
+            'SELECT * FROM paquetes ORDER BY registrado DESC LIMIT $1',
+            [num]
+        );
+        return result.rows;
+    },
     async getPackageState(id){
         const result = await db.query(
             'SELECT estados.id_estado, estados.nombre_estado, estados.descripcion FROM paquetes JOIN estados ON paquetes.estado = estados.id_estado WHERE paquetes.id_paquete = $1',

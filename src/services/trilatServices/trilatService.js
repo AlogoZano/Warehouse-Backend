@@ -4,8 +4,8 @@ const math = require('mathjs');
 const anchors = {
   R1: [0.0, 0.0],
   R2: [1.5, 0.0],
-  R3: [0.0, 4.1],
-  R4: [1.5, 4.1]
+  R3: [1.5, 4.1],
+  R4: [0.0, 4.1]
 };
 
 A1 = -46.0
@@ -22,7 +22,7 @@ function rssiToDistance(rssi, A, n) {
   return Math.pow(10, (A - rssi - 1.0) / (10 * n));
 }
 
-function estimatePosition({ rssi1, rssi2, rssi3, rssi4 }) {
+function estimatePosition([ rssi1, rssi2, rssi3, rssi4 ]) {
   const d1 = rssiToDistance(rssi1, A1, n1);
   const d2 = rssiToDistance(rssi2, A2, n2);
   const d3 = rssiToDistance(rssi3, A3, n3);

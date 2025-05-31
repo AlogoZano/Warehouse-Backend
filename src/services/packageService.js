@@ -59,6 +59,12 @@ const PackageService = {
         return exists;
     },
 
+    async getRecentPkg(num){
+        const pkgs = await PackageModel.getRecentPackages(num);
+
+        return pkgs;
+    },
+
     async getPkgs(){
         const pkgs = await PackageModel.getPackages();
 

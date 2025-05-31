@@ -2,25 +2,31 @@ require('dotenv').config();
 const app = require('./src/app');
 const http = require('http');
 
-const {Server} = require('socket.io');
+// const {Server} = require('socket.io');
 
+const PORT_frontend = 3000;
+const PORT_ESP = 3001;
 
-const PORT = 3000;
-
+// WebSockets
 const server = http.createServer(app);
 
-const io = new Server(server, {
-    cors: {
-        origin: '*',
-    }
-});
+//Socket.io
+// const io = new Server(server, {
+//     cors: {
 
-app.set('io', io);
+//         origin: '*',
+//     }
+// });
 
-io.on('connection', (socket) => {
-    console.log('New client connected: ', socket.id);
-});
+// app.set('io', io);
 
-server.listen(PORT, '0.0.0.0', () => {
+
+// io.on('connection', (socket) => {
+//     console.log('New client connected: ', socket.id);
+
+// });
+
+
+server.listen(PORT_frontend, '0.0.0.0', () => {
     console.log('Server con patas Corriendo');
 });
